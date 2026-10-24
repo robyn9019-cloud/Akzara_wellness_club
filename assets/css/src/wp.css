@@ -1,0 +1,192 @@
+/* Ajustes propios de WordPress sobre el CSS del diseño original. */
+
+/* Las fotos dentro de .media llenan el contenedor (en Next lo hacía next/image con «fill») */
+.media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.media > .hero__video,
+.hero .media > video {
+  position: absolute;
+  inset: 0;
+}
+
+/* Barra de administración de WordPress */
+.admin-bar .hdr {
+  top: 32px;
+}
+.admin-bar .mnav {
+  top: 32px;
+}
+@media (max-width: 782px) {
+  .admin-bar .hdr,
+  .admin-bar .mnav {
+    top: 46px;
+  }
+}
+
+/* Accesibilidad */
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 200;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+}
+
+/* Contenido escrito en el editor de WordPress (artículos, políticas, páginas) */
+.prose :is(h2, h3) {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+.prose h3 {
+  font-size: 22px;
+  margin: 1.4em 0 0.4em;
+}
+.prose ul,
+.prose ol {
+  margin: 0 0 1em;
+  padding-left: 1.2em;
+}
+.prose a {
+  color: var(--bronze-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+.prose blockquote {
+  margin: 1.4em 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--bronze);
+  font-family: var(--serif);
+  font-size: 22px;
+}
+.alignleft {
+  float: left;
+  margin: 0 1.2em 1em 0;
+}
+.alignright {
+  float: right;
+  margin: 0 0 1em 1.2em;
+}
+.aligncenter {
+  display: block;
+  margin: 1em auto;
+}
+
+/* Página de reservas (el shortcode de Amelia se imprime dentro) */
+.booking-embed {
+  background: var(--bg-card);
+  border: 1px solid #e3ddd3;
+  border-radius: var(--radius);
+  padding: clamp(18px, 3vw, 34px);
+  min-height: 320px;
+}
+.booking-embed :is(iframe, img) {
+  max-width: 100%;
+}
+.booking-embed [class*='amelia'],
+.booking-embed [class^='am-'] {
+  font-family: var(--sans);
+}
+.booking-note {
+  max-width: 62ch;
+  margin: 0 auto 26px;
+  text-align: center;
+  color: var(--ink-2);
+  font-size: 13.5px;
+}
+
+/* Formularios de WordPress con los estilos del diseño */
+.form-msg {
+  margin-top: 12px;
+  font-size: 13px;
+}
+.form-msg.is-err {
+  color: #a5503a;
+}
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Paginación y listas de entradas */
+.nav-links {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 40px;
+  font-size: 13px;
+}
+.nav-links .current {
+  border-bottom: 1px solid var(--ink);
+}
+
+/* Aviso: sin JavaScript las partes interactivas siguen siendo legibles */
+.qb select,
+.qb .dp__btn {
+  min-height: 24px;
+}
+
+/* El selector de idioma solo se muestra si se activa en el Personalizador */
+.lang[hidden] {
+  display: none;
+}
+.lang a {
+  color: inherit;
+}
+.lang a[aria-current='true'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.hdr--over:not(.hdr--solid) .lang a[aria-current='true'] {
+  color: inherit;
+}
+
+/* Elementos que el JavaScript muestra u oculta con el atributo hidden */
+.dd__img [hidden],
+.gal__slide[hidden],
+.promo[hidden],
+[data-empty][hidden] {
+  display: none !important;
+}
+
+/* Si el JavaScript no llega a cargar, las fotos se muestran igual tras unos segundos */
+@keyframes akz-show {
+  to {
+    opacity: 1;
+  }
+}
+@media (scripting: enabled) {
+  .media img.fade {
+    animation: akz-show 0.01s 4s forwards;
+  }
+}

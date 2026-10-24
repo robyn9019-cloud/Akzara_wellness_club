@@ -1,0 +1,16 @@
+{
+  "name": "akzara-wp-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tema de WordPress de Akzara Wellness Club (réplica del sitio Next.js).",
+  "scripts": {
+    "build:css": "esbuild assets/css/src/main.css --bundle --minify --external:../fonts/* --outfile=assets/css/main.css",
+    "build:js": "esbuild assets/js/src/main.js --bundle --minify --target=es2019 --outfile=assets/js/main.js && esbuild assets/js/src/admin.js --bundle --minify --target=es2019 --outfile=assets/js/admin.js",
+    "build": "npm run build:css && npm run build:js"
+  },
+  "devDependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "esbuild": "^0.28.2"
+  }
+}

@@ -1,0 +1,17 @@
+/*
+Theme Name: Akzara Wellness Club
+Theme URI: https://akzaraspa.co
+Author: Akzara
+Author URI: https://akzaraspa.co
+Description: Tema a medida de Akzara Wellness Club, spa de lujo silencioso en El Poblado, Medellín. Réplica del sitio Next.js: rituales, membresías, gift card y página de reservas lista para Amelia. Sin constructores de páginas.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 7.4
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: akzara
+Tags: custom-logo, custom-menu, featured-images, translation-ready, one-column, accessibility-ready
+*/
+
+/* Los estilos del tema están en assets/css/main.css (compilado desde assets/css/src). Este archivo solo identifica el tema. */
