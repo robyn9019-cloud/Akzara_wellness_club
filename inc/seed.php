@@ -362,7 +362,9 @@ function akzara_seed_run() {
 	}
 	update_option( 'blogname', 'Akzara Wellness Club' );
 	update_option( 'blogdescription', 'Spa en Medellín: el único jardín de la Milla de Oro' );
-	update_option( 'permalink_structure', '/diario/%postname%/' );
+	global $wp_rewrite;
+	$wp_rewrite->set_permalink_structure( '/diario/%postname%/' );
+	$wp_rewrite->set_category_base( '' );
 
 	// Imágenes del Personalizador.
 	$mods = array(
@@ -414,7 +416,7 @@ function akzara_seed_run() {
 	akzara_seed_menu( 'Akzara · Legal', 'akzara_legal', $legal );
 
 	update_option( 'akzara_seeded', 1 );
-	flush_rewrite_rules( false );
+	$wp_rewrite->flush_rules( false );
 }
 
 /**

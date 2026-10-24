@@ -67,6 +67,27 @@ function akzara_disable_emojis() {
 add_action( 'init', 'akzara_disable_emojis' );
 
 /**
+ * Con direcciones tipo /diario/%postname%/, WordPress genera una regla por cada página y una
+ * dirección inexistente acabaría mostrando el inicio. Esta regla final la manda a «no encontrada».
+ */
+function akzara_catch_all_rule() {
+	add_rewrite_rule( '^(.+?)/?$', 'index.php?error=404', 'bottom' );
+}
+add_action( 'init', 'akzara_catch_all_rule', 20 );
+
+/**
+ * Actualiza las direcciones una sola vez cada vez que cambia la versión del tema.
+ */
+function akzara_maybe_flush_rules() {
+	$stamp = AKZARA_VERSION . '-3';
+	if ( get_option( 'akzara_rules_v' ) !== $stamp ) {
+		flush_rewrite_rules( false );
+		update_option( 'akzara_rules_v', $stamp );
+	}
+}
+add_action( 'init', 'akzara_maybe_flush_rules', 99 );
+
+/**
  * Redirecciones de las direcciones de la web anterior.
  */
 function akzara_legacy_redirects() {
