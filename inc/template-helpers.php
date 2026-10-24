@@ -105,8 +105,8 @@ function akzara_ritual_card( $r, $ratio = 'r-4x5' ) {
 		<span class="eyebrow"><?php echo esc_html( $r['cat_name'] ); ?></span>
 		<h3 class="h-card"><a href="<?php echo esc_url( $r['url'] ); ?>"><?php echo esc_html( $r['name'] ); ?></a></h3>
 		<div class="meta">
-			<span><?php echo esc_html( akzara_duration( $r['min'] ) ); ?></span>
-			<span class="meta__price">desde <?php echo esc_html( akzara_cop( $r['price'] ) ); ?></span>
+			<span><?php echo esc_html( $r['min'] > 0 ? akzara_duration( $r['min'] ) : '' ); ?></span>
+			<span class="meta__price"><?php echo esc_html( $r['price'] > 0 ? 'desde ' . akzara_cop( $r['price'] ) : 'Consultar' ); ?></span>
 		</div>
 		<div class="actions">
 			<a class="btn" href="<?php echo esc_url( add_query_arg( 'ritual', $r['slug'], home_url( '/reservar/' ) ) ); ?>">Reservar</a>

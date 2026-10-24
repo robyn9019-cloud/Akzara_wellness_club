@@ -220,6 +220,7 @@ function akzara_seed_run() {
 				'post_title'   => wp_slash( $s['name'] ),
 				'post_name'    => $s['slug'],
 				'post_excerpt' => wp_slash( $s['summary'] ),
+				'post_content' => isset( $s['description'] ) ? wp_slash( wpautop( $s['description'] ) ) : '',
 				'menu_order'   => (int) $s['order'],
 			)
 		);
@@ -251,7 +252,9 @@ function akzara_seed_run() {
 			'_ak_badge'     => (string) $s['badge'],
 			'_ak_featured'  => (int) $s['featured'] > 0 ? 1 : 0,
 			'_ak_signature' => ! empty( $s['signature'] ) ? 1 : 0,
-			'_ak_giftable'  => 1,
+			'_ak_giftable'  => isset( $s['giftable'] ) && ! $s['giftable'] ? 0 : 1,
+			'_ak_includes'  => isset( $s['includes'] ) ? implode( "\n", $s['includes'] ) : '',
+			'_ak_pricenote' => isset( $s['priceNote'] ) ? $s['priceNote'] : '',
 			'_ak_tone'      => (string) $s['tone'],
 			'_ak_gallery'   => implode( ',', $gal ),
 			'_ak_steps'     => wp_json_encode( $steps ),

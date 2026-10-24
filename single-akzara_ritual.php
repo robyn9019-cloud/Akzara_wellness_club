@@ -67,13 +67,23 @@ while ( have_posts() ) :
 							<p class="lead"><?php echo esc_html( $akzara_s['summary'] ); ?></p>
 						<?php endif; ?>
 						<dl class="facts">
-							<div><dt>Duración</dt><dd><?php echo esc_html( akzara_duration( $akzara_s['min'] ) ); ?></dd></div>
+							<?php if ( $akzara_s['min'] > 0 ) : ?>
+								<div><dt>Duración</dt><dd><?php echo esc_html( akzara_duration( $akzara_s['min'] ) ); ?></dd></div>
+							<?php endif; ?>
 							<div><dt>Personas</dt><dd><?php echo esc_html( $akzara_s['min_people'] === $akzara_s['max_people'] ? $akzara_s['min_people'] : $akzara_s['min_people'] . '–' . $akzara_s['max_people'] ); ?></dd></div>
 							<div>
-								<dt>Desde</dt>
-								<dd><span class="big"><?php echo esc_html( akzara_cop( $akzara_s['price'] ) ); ?></span><small><?php echo 'grupo' === $akzara_s['mode'] ? 'por pareja' : 'por persona'; ?></small></dd>
+								<?php if ( $akzara_s['price'] > 0 ) : ?>
+									<dt>Desde</dt>
+									<dd><span class="big"><?php echo esc_html( akzara_cop( $akzara_s['price'] ) ); ?></span><small><?php echo 'grupo' === $akzara_s['mode'] ? 'por pareja' : 'por persona'; ?></small></dd>
+								<?php else : ?>
+									<dt>Valor</dt>
+									<dd><span class="big">Consultar</span><small>con nuestro concierge</small></dd>
+								<?php endif; ?>
 							</div>
 						</dl>
+						<?php if ( $akzara_s['price_note'] ) : ?>
+							<p class="note" style="margin-top:-6px"><?php echo esc_html( $akzara_s['price_note'] ); ?></p>
+						<?php endif; ?>
 						<div class="book-card__acts">
 							<a class="btn btn--block" href="<?php echo esc_url( $akzara_book ); ?>">Reservar</a>
 							<?php if ( $akzara_s['giftable'] ) : ?>

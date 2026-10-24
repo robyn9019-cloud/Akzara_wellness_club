@@ -55,6 +55,7 @@ function akzara_ritual_box( $post ) {
 	akzara_field_row( '_ak_price', __( 'Precio desde (COP)', 'akzara' ), $g( '_ak_price', 0 ), 'number', __( 'En pesos, sin puntos. Ej.: 280000.', 'akzara' ) );
 	akzara_field_row( '_ak_deposit', __( 'Anticipo (%)', 'akzara' ), $g( '_ak_deposit', 50 ), 'number', __( 'Lo que se pide para confirmar. Informativo: los cobros los gestiona Amelia.', 'akzara' ) );
 	echo '</div>';
+	akzara_field_row( '_ak_pricenote', __( 'Nota de precio (opcional)', 'akzara' ), $g( '_ak_pricenote' ), 'text', __( 'Se muestra bajo el precio. Ej.: Precio normal: $380.000 · Huéspedes: $249.500. Con precio 0 la ficha dice «Consultar».', 'akzara' ) );
 
 	echo '<p class="akz-row"><label for="_ak_mode"><strong>' . esc_html__( 'El precio es', 'akzara' ) . '</strong></label><br><select id="_ak_mode" name="_ak_mode">';
 	foreach ( array( 'persona' => __( 'Por persona', 'akzara' ), 'grupo' => __( 'Por pareja / grupo', 'akzara' ) ) as $v => $l ) {
@@ -189,6 +190,7 @@ function akzara_save_meta( $post_id ) {
 		foreach ( $nums as $k ) {
 			update_post_meta( $post_id, $k, isset( $_POST[ $k ] ) ? absint( wp_unslash( $_POST[ $k ] ) ) : 0 );
 		}
+		update_post_meta( $post_id, '_ak_pricenote', isset( $_POST['_ak_pricenote'] ) ? sanitize_text_field( wp_unslash( $_POST['_ak_pricenote'] ) ) : '' );
 		$mode = isset( $_POST['_ak_mode'] ) ? sanitize_key( wp_unslash( $_POST['_ak_mode'] ) ) : 'persona';
 		update_post_meta( $post_id, '_ak_mode', 'grupo' === $mode ? 'grupo' : 'persona' );
 		$tone = isset( $_POST['_ak_tone'] ) ? sanitize_key( wp_unslash( $_POST['_ak_tone'] ) ) : 'arena';

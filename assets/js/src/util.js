@@ -14,6 +14,7 @@ export const cop = (n) => '$ ' + Math.round(Number(n) || 0).toLocaleString('es-C
 /** 80 → 1 h 20', 60 → 1 h, 35 → 35 min */
 export const duration = (min) => {
   min = Number(min) || 0;
+  if (!min) return 'duración a confirmar';
   if (min < 60) return min + ' min';
   const h = Math.floor(min / 60);
   const m = min % 60;

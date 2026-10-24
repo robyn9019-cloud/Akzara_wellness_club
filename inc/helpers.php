@@ -339,6 +339,7 @@ function akzara_ritual( $post ) {
 		'min_people'    => max( 1, (int) get_post_meta( $id, '_ak_minp', true ) ),
 		'max_people'    => max( 1, (int) get_post_meta( $id, '_ak_maxp', true ) ),
 		'badge'         => (string) get_post_meta( $id, '_ak_badge', true ),
+		'price_note'    => (string) get_post_meta( $id, '_ak_pricenote', true ),
 		'featured'      => (bool) get_post_meta( $id, '_ak_featured', true ),
 		'signature'     => (bool) get_post_meta( $id, '_ak_signature', true ),
 		'giftable'      => '0' !== (string) get_post_meta( $id, '_ak_giftable', true ),
