@@ -129,6 +129,16 @@ if ( $akzara_steps ) :
 	</section>
 <?php endif; ?>
 
+<section class="section section--dark">
+	<div class="container giftcta">
+		<div class="card3d"><?php echo akzara_gift_face( 'lino', '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+		<div>
+			<h2 class="h-section" style="margin-bottom:26px"><?php echo akzara_italic( akzara_opt( 'gift_title' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
+			<a class="btn btn--outline-light" href="<?php echo esc_url( home_url( '/gift-card/' ) ); ?>"><?php echo esc_html( akzara_opt( 'gift_button' ) ); ?></a>
+		</div>
+	</div>
+</section>
+
 <?php
 $akzara_quotes = akzara_testimonials( 3 );
 if ( $akzara_quotes ) :
@@ -159,16 +169,6 @@ if ( $akzara_faqs ) :
 		</div>
 	</section>
 <?php endif; ?>
-
-<section class="section section--dark">
-	<div class="container giftcta">
-		<div class="card3d"><?php echo akzara_gift_face( 'lino', '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
-		<div>
-			<h2 class="h-section" style="margin-bottom:26px"><?php echo akzara_italic( akzara_opt( 'gift_title' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
-			<a class="btn btn--outline-light" href="<?php echo esc_url( home_url( '/gift-card/' ) ); ?>"><?php echo esc_html( akzara_opt( 'gift_button' ) ); ?></a>
-		</div>
-	</div>
-</section>
 
 <?php akzara_hscroll( akzara_opt( 'gallery_title' ), array_filter( array_map( 'absint', explode( ',', (string) akzara_opt( 'gallery_ids' ) ) ) ) ); ?>
 

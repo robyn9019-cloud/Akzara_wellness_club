@@ -27,6 +27,12 @@
   }
 }
 
+/* La gift card de la sección «Regalar» toma su ancho de la foto en el original; aquí se fija */
+.card3d {
+  width: 100%;
+  max-width: 430px;
+}
+
 /* Accesibilidad */
 .screen-reader-text {
   position: absolute;

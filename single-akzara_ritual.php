@@ -169,6 +169,19 @@ while ( have_posts() ) :
 			)
 		);
 	}
+	// Si la categoría tiene pocos rituales, se completa con otros hasta tener tres.
+	if ( count( $akzara_rel ) < 3 ) {
+		$akzara_have = array_merge( array( $akzara_s['id'] ), wp_list_pluck( $akzara_rel, 'id' ) );
+		$akzara_more = akzara_rituals(
+			array(
+				'post__not_in'   => $akzara_have,
+				'posts_per_page' => 3 - count( $akzara_rel ),
+				'meta_key'       => '_ak_featured', // phpcs:ignore WordPress.DB.SlowDBQuery
+				'orderby'        => array( 'meta_value_num' => 'DESC', 'menu_order' => 'ASC' ),
+			)
+		);
+		$akzara_rel = array_merge( $akzara_rel, $akzara_more );
+	}
 	if ( $akzara_rel ) :
 		?>
 		<section class="section">

@@ -352,6 +352,20 @@ function akzara_seed_run() {
 		}
 	}
 
+	// Quita la entrada y la página de ejemplo que trae WordPress (solo si siguen sin tocar).
+	foreach ( array( 'hello-world', 'hola-mundo' ) as $akzara_slug ) {
+		$akzara_old = akzara_seed_find( 'post', $akzara_slug );
+		if ( $akzara_old && 1 === (int) $akzara_old ) {
+			wp_delete_post( $akzara_old, true );
+		}
+	}
+	foreach ( array( 'sample-page', 'pagina-de-ejemplo' ) as $akzara_slug ) {
+		$akzara_old = akzara_seed_find( 'page', $akzara_slug );
+		if ( $akzara_old && 2 === (int) $akzara_old ) {
+			wp_delete_post( $akzara_old, true );
+		}
+	}
+
 	// Lectura y enlaces permanentes.
 	if ( $home ) {
 		update_option( 'show_on_front', 'page' );
