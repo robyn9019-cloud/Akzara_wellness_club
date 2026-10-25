@@ -21,8 +21,20 @@ while ( have_posts() ) :
 			<div class="booking-embed">
 				<?php
 				$akzara_content = get_the_content();
+				// Si llega ?ritual={slug} y el ritual tiene su servicio de Amelia, se abre con ese servicio elegido.
+				$akzara_servicio = 0;
+				$akzara_slug     = isset( $_GET['ritual'] ) ? sanitize_title( wp_unslash( $_GET['ritual'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( '' !== $akzara_slug ) {
+					$akzara_ritual = get_page_by_path( $akzara_slug, OBJECT, 'akzara_ritual' );
+					if ( $akzara_ritual && 'publish' === $akzara_ritual->post_status ) {
+						$akzara_servicio = (int) get_post_meta( $akzara_ritual->ID, '_ak_amelia', true );
+					}
+				}
 				if ( '' === trim( wp_strip_all_tags( $akzara_content ) ) ) {
 					echo '<p class="muted" style="text-align:center">' . esc_html__( 'Aquí aparecerá el motor de reservas. Pegue el shortcode de Amelia en el contenido de esta página.', 'akzara' ) . '</p>';
+				} elseif ( $akzara_servicio > 0 ) {
+					$akzara_tag = false !== strpos( $akzara_content, '[ameliabooking' ) ? 'ameliabooking' : 'ameliastepbooking';
+					echo do_shortcode( '[' . $akzara_tag . ' service=' . $akzara_servicio . ']' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				} else {
 					the_content();
 				}

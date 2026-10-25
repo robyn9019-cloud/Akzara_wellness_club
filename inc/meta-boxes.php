@@ -57,6 +57,8 @@ function akzara_ritual_box( $post ) {
 	echo '</div>';
 	akzara_field_row( '_ak_pricenote', __( 'Nota de precio (opcional)', 'akzara' ), $g( '_ak_pricenote' ), 'text', __( 'Se muestra bajo el precio. Ej.: Precio normal: $380.000 · Huéspedes: $249.500. Con precio 0 la ficha dice «Consultar».', 'akzara' ) );
 
+	akzara_field_row( '_ak_amelia', __( 'ID del servicio en Amelia (opcional)', 'akzara' ), $g( '_ak_amelia', 0 ), 'number', __( 'Amelia → Catálogo → Servicios. Si se completa, «Reservar» abre el formulario con este ritual ya elegido. 0 = sin preselección.', 'akzara' ) );
+
 	echo '<p class="akz-row"><label for="_ak_mode"><strong>' . esc_html__( 'El precio es', 'akzara' ) . '</strong></label><br><select id="_ak_mode" name="_ak_mode">';
 	foreach ( array( 'persona' => __( 'Por persona', 'akzara' ), 'grupo' => __( 'Por pareja / grupo', 'akzara' ) ) as $v => $l ) {
 		echo '<option value="' . esc_attr( $v ) . '"' . selected( $g( '_ak_mode', 'persona' ), $v, false ) . '>' . esc_html( $l ) . '</option>';
@@ -190,6 +192,7 @@ function akzara_save_meta( $post_id ) {
 		foreach ( $nums as $k ) {
 			update_post_meta( $post_id, $k, isset( $_POST[ $k ] ) ? absint( wp_unslash( $_POST[ $k ] ) ) : 0 );
 		}
+		update_post_meta( $post_id, '_ak_amelia', isset( $_POST['_ak_amelia'] ) ? absint( wp_unslash( $_POST['_ak_amelia'] ) ) : 0 );
 		update_post_meta( $post_id, '_ak_pricenote', isset( $_POST['_ak_pricenote'] ) ? sanitize_text_field( wp_unslash( $_POST['_ak_pricenote'] ) ) : '' );
 		$mode = isset( $_POST['_ak_mode'] ) ? sanitize_key( wp_unslash( $_POST['_ak_mode'] ) ) : 'persona';
 		update_post_meta( $post_id, '_ak_mode', 'grupo' === $mode ? 'grupo' : 'persona' );
